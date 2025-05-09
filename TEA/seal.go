@@ -7,6 +7,20 @@ import (
 )
 
 func Seal(str, scope, decryptedStr string) string {
+	//testBytes := []byte{114, 105, 47, 53,
+	//	51, 55, 46, 51}
+	//underscore := []byte{53, 219, 93, 231,
+	//	248, 106, 42, 192}
+	/*
+			output:
+		[
+		   71, 178, 114, 210,
+		  203,  93,   4, 243
+		]
+	*/
+	//fmt.Println(testBytes)
+	//fmt.Println([]byte(oL(string(underscore), string(testBytes))))
+	//panic("TES")
 	e := oz(str, scope, nil, nil, decryptedStr)
 	return oJ(e)
 }

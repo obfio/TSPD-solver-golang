@@ -1,7 +1,6 @@
 package main
 
 import (
-	"TSPD-solver-golang/TEA"
 	"TSPD-solver-golang/TSPD"
 	"fmt"
 	"math/rand"
@@ -20,7 +19,7 @@ func main() {
 		return
 	}
 	loaderStr := "0858a1935d018000eb31f80e30158c467560fe9d598bcac4cb1f15a3caecbd7c31e2467ea2253b0ac7a6fe59bafd7930ac200fee3be76559c25e3a6c08afe2b29d38c8a2af332e182c76b5e09d765d03359a15b16881e99747bb302a6c69292dc1f7e053e9539f346bf2d40deb0e026b5bdfbc612c1fd61d50b049778bd29ecb485ecb67327e176b"
-	fmt.Println(TEA.DecryptLoaderStr(loaderStr))
+	//fmt.Println(TEA.DecryptLoaderStr(loaderStr))
 	cookie := TSPD.GenerateCookie(bobOut, loaderStr)
 	fmt.Println(cookie)
 }

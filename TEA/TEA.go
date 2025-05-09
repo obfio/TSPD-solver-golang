@@ -1,9 +1,12 @@
 package TEA
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
+	"unicode/utf16"
 )
 
 func DecryptLoaderStr(str string) string {
@@ -188,22 +191,46 @@ func sl(str, scope string, oj, Oj, _j bool, jJ1 int, lJ bool) interface{} {
 	    }
 */
 func j_(J, L string, z bool) string {
-	length := len(L)
+	// L is the payload string
+	// the length is correct I guess
 	underscore := "\000\000\000\000\000\000\000\000"
 	I := ""
 	if z {
-		if length%8 != 0 {
+		if len(L)%8 != 0 {
 			panic("Decryption failure")
 		}
 		I = jS(J, L, false, "EMPTY")
 		return O_(I)
 	}
 	L = l_(L, 8, "\xFF")
-	z1 := length / 8
+	utf16Bytes := utf16.Encode([]rune(L))
+	z1 := len(utf16Bytes) / 8
 	for jj := 0; jj < z1; jj++ {
-		underscore = iz1(J, oL(underscore, L[jj*8:(jj*8)+8]), false)
+		x := oL(underscore, L[jj*8:(jj*8)+8])
+		if []byte(x)[0] == 71 {
+			fmt.Println([]byte(x))
+			fmt.Println([]byte(underscore))
+			//panic("A")
+		}
+		underscore = iz1(J, x, false)
 		I += underscore
 	}
+	a := strings.Split(I, "")
+	asd, _ := json.Marshal(a)
+	os.WriteFile("idk1.json", asd, 0644)
+	//tmp := []string{}
+	//f, _ := os.ReadFile("./idk.json")
+	//json.Unmarshal(f, &tmp)
+	//for i, a := range strings.Split(I, "") {
+	//	if []byte(a) != []byte(tmp[i]) {
+	//		fmt.Println(i, a, tmp[i])
+	//		panic("a")
+	//	}
+	//}
+	test := utf16.Encode([]rune(I))
+	fmt.Println(len(test))
+	fmt.Println(len(I))
+	panic("ASD")
 	return I
 }
 
@@ -553,8 +580,6 @@ func capitalJdollarsign(J string) int {
 	      }
 */
 func oL(J, L string) string {
-	//fmt.Println([]byte(J), "XOR J")
-	//fmt.Println([]byte(L), "XOR L")
 	if len(J) != len(L) {
 		panic("xorBytes:: Length don't match -- ")
 	}

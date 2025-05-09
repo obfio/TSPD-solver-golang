@@ -13,7 +13,8 @@ func GenerateCookie(bob []interface{}, loaderStr string) string {
 	out := ""
 	out += doubleInt(bob[13].(int64))
 	out += doubleInt(bob[14].(int64))
-	decrypted := TEA.DecryptLoaderStr(loaderStr)
+	//decrypted := TEA.DecryptLoaderStr(loaderStr)
+	decrypted := "087b6cfa27ab28004bcafe717c31db7366ebf634c8f114ce5735d1d533df15a09cbc05706e96d4257e5cb03a58a413f4"
 	p := &Payload{}
 	json.Unmarshal([]byte(defaultPayload), &p)
 	payloadStr := p.generatePayloadStr()
